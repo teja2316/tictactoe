@@ -1,17 +1,31 @@
 import React from 'react';
 
-const StatusMessage = ({winner, current}) => {
+const StatusMessage = ({ winner, current }) => {
   // const message = winner
   // ? `The Winner Is ${winner}`
   // : `Next Player Is ${current.isXNext ? 'X' : 'O'}`;
 
-  const noMovesLeft = current.board.every((el)=> el !== null);
+  const noMovesLeft = current.board.every(el => el !== null);
   return (
-    <h2>      
-      {winner && `The Winner Is ${winner}`}
-      {!winner && !noMovesLeft && `Next Player Is ${current.isXNext ? 'X' : 'O'}`}
-      {!winner && noMovesLeft && 'X and O are Tied'}
-    </h2>
+    <div className="status-message">
+      {winner && (
+        <>
+          winner is{' '}
+          <span className={winner === 'X' ? 'text-green' : 'text-orange'}>
+            {winner}
+          </span>
+        </>
+      )}
+      {!winner &&
+        !noMovesLeft &&
+        <>
+        Next Player Is <span className={current.isXNext ? 'text-green' : 'text-orange'}> {current.isXNext ? 'X' : 'O'} </span>
+        </>}
+      {!winner && noMovesLeft && 
+      <>
+        <span className='text-green'>X</span> and <span className='text-orange'>O</span> are Tied
+      </>}
+    </div>
   );
 };
 
